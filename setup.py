@@ -22,6 +22,7 @@ if __name__ == "__main__":
           version=VERSION,
           download_url=DOWNLOAD_URL,
           long_description=open('README.md').read(),
+          install_requires=['pyglmnet', 'xgboost'],
           classifiers=[
               'Intended Audience :: Science/Research',
               'Intended Audience :: Developers',
