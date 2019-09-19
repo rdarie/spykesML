@@ -2,14 +2,18 @@ import numpy as np
 import warnings
 
 #GLM
-from pyglmnet import GLM
+from pyglmnet import GLM, GLMCV
 
 #NN
-from keras.models import Sequential
-from keras.layers.core import Dense, Dropout, Activation, Lambda
-from keras.regularizers import l2
-from keras.optimizers import Nadam, adam
-from keras.layers.normalization import BatchNormalization
+try:
+    from keras.models import Sequential
+    from keras.layers.core import Dense, Dropout, Activation, Lambda
+    from keras.regularizers import l2
+    from keras.optimizers import Nadam, adam
+    from keras.layers.normalization import BatchNormalization
+    HAS_KERAS = True
+except Exception:
+    HAS_KERAS = False
 
 #CV
 from sklearn.model_selection import KFold
@@ -21,9 +25,13 @@ import xgboost as xgb
 from sklearn.ensemble import RandomForestRegressor
 
 #LSTM
-from keras.layers import  LSTM
-from keras.models import Sequential
-from keras.layers.core import Dense, Dropout, Activation, Lambda
+try:
+    from keras.layers import  LSTM
+    from keras.models import Sequential
+    from keras.layers.core import Dense, Dropout, Activation, Lambda
+    HAS_KERAS = True
+except Exception:
+    HAS_KERAS = False
 
 class MLencoding(object):
     """
@@ -235,11 +243,13 @@ class MLencoding(object):
                 X, Y = self.get_all_with_history(X, Y)
 
         if self.tunemodel == 'glm':
-            model = GLM(**self.params)
+            model = GLMCV(**self.params)
             model.fit(X, Y)
 
             # we want the last of the regularization path
-            self.model = model[-1]
+            # self.model = model[-1]
+            self.GLMCV = model
+            self.model = model.glm_
 
         elif self.tunemodel == 'feedforward_nn':
 
