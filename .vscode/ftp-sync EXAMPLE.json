@@ -1,8 +1,8 @@
 {
-    "remotePath": "/gpfs_home/rdarie/Github/spykesML/",
+    "remotePath": "/gpfs_home/YOUR_USERNAME/Github/spykesML/",
     "host": "ssh.ccv.brown.edu",
-    "username": "rdarie",
-    "password": "Monkey$2020",
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD",
     "port": 22,
     "secure": true,
     "protocol": "sftp",
